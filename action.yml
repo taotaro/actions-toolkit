@@ -1,0 +1,29 @@
+name: 'Alibaba Cloud Container Registry (ACR) Login'
+description: 'Log in to a container registry'
+inputs:
+  access-key:
+    description: 'AliCloud Access Key'
+    required: true
+    default: ''
+  secret-key:
+    description: 'AliCloud Secret Key'
+    required: true
+    default: ''
+  region-id:
+    description: 'AliCloud Region Id'
+    required: true
+    default: ''
+  app-id:
+    description: 'SAE Application ID'
+    required: true
+    default: ''
+  image-url:
+    description: 'Docker Image URL'
+    required: true
+    default: ''
+branding:
+  color: 'green'
+  icon: 'anchor'
+runs:
+  using: 'node20'
+  main: 'dist/index.js'
