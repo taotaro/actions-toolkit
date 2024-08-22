@@ -1,11 +1,11 @@
 name: 'Alibaba Cloud Container Registry (ACR) Login'
 description: 'Log in to a container registry'
 inputs:
-  access-key:
+  access-key-id:
     description: 'AliCloud Access Key'
     required: true
     default: ''
-  secret-key:
+  access-key-secret:
     description: 'AliCloud Secret Key'
     required: true
     default: ''
