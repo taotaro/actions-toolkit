@@ -57,9 +57,9 @@ runs:
         password: ${{ inputs.acr-password }}
         region-id: ${{ inputs.region-id }}
 
-    - name: Build and Push Docker Image
-      run: docker buildx build --platform linux/amd64 -t ${{ inputs.image-url }} -f ./Dockerfile --push .
-      shell: bash
+#    - name: Build and Push Docker Image
+#      run: docker buildx build --platform linux/amd64 -t ${{ inputs.image-url }} -f ./Dockerfile --push .
+#      shell: bash
 
     - name: Set up Node.js
       uses: actions/setup-node@v2
@@ -67,5 +67,5 @@ runs:
         node-version: 20
 
     - name: Run custom script
-      run: node dist/index.js
+      run: node ./dist/index.js
       shell: bash
