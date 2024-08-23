@@ -1,6 +1,18 @@
-name: 'Alibaba Cloud Container Registry (ACR) Login'
-description: 'Log in to a container registry'
+name: 'Build Image To AliCloud Container Registry'
+description: 'Build Image To AliCloud Container Registry'
 inputs:
+  acr-login-server:
+    description: 'ACR Repository Login Server'
+    required: true
+    default: ''
+  acr-username:
+    description: 'ACR Repository Username'
+    required: true
+    default: ''
+  acr-password:
+    description: 'ACR Repository Password'
+    required: true
+    default: ''
   access-key-id:
     description: 'AliCloud Access Key'
     required: true
@@ -25,5 +37,20 @@ branding:
   color: 'green'
   icon: 'anchor'
 runs:
-  using: 'node20'
-  main: 'dist/index.js'
+  using: 'composite'
+  steps:
+    - name: Login to ACR
+      uses: aliyun/acr-login@v1
+      with:
+        login-server: ${{ inputs.acr-login-server }}
+        username: ${{ inputs.acr-username }}
+        password: ${{ inputs.acr-password }}
+        region-id: ${{ inputs.region-id }}
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: 20
+
+    - name: Run custom script
+      main: 'dist/index.js'
