@@ -1,20 +1,6 @@
 name: 'Build Image To AliCloud Container Registry'
 description: 'Build Image To AliCloud Container Registry'
-author: 'liuyongjun@materia-logic.com'
-
 inputs:
-  acr-login-server:
-    description: 'ACR Repository Login Server'
-    required: true
-    default: ''
-  acr-username:
-    description: 'ACR Repository Username'
-    required: true
-    default: ''
-  acr-password:
-    description: 'ACR Repository Password'
-    required: true
-    default: ''
   access-key-id:
     description: 'AliCloud Access Key'
     required: true
@@ -35,37 +21,9 @@ inputs:
     description: 'Docker Image URL'
     required: true
     default: ''
-
 branding:
   color: 'green'
   icon: 'anchor'
-
 runs:
-  using: 'composite'
-  steps:
-    - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v3.6.1
-      with:
-        driver: docker-container  # 使用 docker-container 驱动
-        install: true
-
-    - name: Login to ACR
-      uses: aliyun/acr-login@v1
-      with:
-        login-server: ${{ inputs.acr-login-server }}
-        username: ${{ inputs.acr-username }}
-        password: ${{ inputs.acr-password }}
-        region-id: ${{ inputs.region-id }}
-
-#    - name: Build and Push Docker Image
-#      run: docker buildx build --platform linux/amd64 -t ${{ inputs.image-url }} -f ./Dockerfile --push .
-#      shell: bash
-
-    - name: Set up Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: 20
-
-    - name: Run custom script
-      run: node ./dist/index.js
-      shell: bash
+  using: 'node20'
+  main: 'dist/index.js'
