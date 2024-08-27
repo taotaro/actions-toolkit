@@ -34,12 +34,14 @@ class Client {
         this.appId = core.getInput('sae-app-id', { required: false });
         this.imageUrl = core.getInput('acr-image-url', { required: false });
         this.acrInstanceId = core.getInput('acr-instance-id', { required: false });
+        this.timezone = core.getInput('timezone', { required: false });
 
         let client = Client.createClient();
         let deployApplicationRequest = new SAEClient.DeployApplicationRequest({});
         deployApplicationRequest.appId = this.appId;
         deployApplicationRequest.imageUrl = this.imageUrl;
         deployApplicationRequest.acrInstanceId = this.acrInstanceId;
+        deployApplicationRequest.timezone = this.timezone;
 
         let runtime = new Util.RuntimeOptions({});
         let headers = { 'Content-Type': 'application/json' };

@@ -25,9 +25,15 @@ inputs:
     description: 'ACR Instance ID'
     required: true
     default: ''
+  timezone:
+    description: 'Timezone'
+    required: true
+    default: ''
+
 branding:
   color: 'green'
   icon: 'anchor'
+
 runs:
   using: 'node20'
   main: 'dist/index.js'
