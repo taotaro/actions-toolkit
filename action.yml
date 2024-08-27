@@ -25,10 +25,6 @@ inputs:
     description: 'ACR Instance ID'
     required: true
     default: ''
-  timezone:
-    description: 'Timezone'
-    required: true
-    default: ''
 
 branding:
   color: 'green'

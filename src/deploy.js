@@ -34,20 +34,16 @@ class Client {
         this.appId = core.getInput('sae-app-id', { required: false });
         this.imageUrl = core.getInput('acr-image-url', { required: false });
         this.acrInstanceId = core.getInput('acr-instance-id', { required: false });
-        this.timezone = core.getInput('timezone', { required: false });
 
         let client = Client.createClient();
         let deployApplicationRequest = new SAEClient.DeployApplicationRequest({});
         deployApplicationRequest.appId = this.appId;
         deployApplicationRequest.imageUrl = this.imageUrl;
         deployApplicationRequest.acrInstanceId = this.acrInstanceId;
-        deployApplicationRequest.timezone = this.timezone;
 
-        let runtime = new Util.RuntimeOptions({});
-        let headers = { 'Content-Type': 'application/json' };
         try {
             // Copy the code to run, please print the return value of the API by yourself.
-            await client.deployApplicationWithOptions(deployApplicationRequest, headers, runtime);
+            await client.deployApplication(deployApplicationRequest);
         } catch (error) {
             // Only a printing example. Please be careful about exception handling and do not ignore exceptions directly in engineering projects.
             // print error message
