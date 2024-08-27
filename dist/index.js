@@ -39758,13 +39758,16 @@ class Client {
         this.accessKeyId = core.getInput('access-key-id', { required: false });
         this.accessKeySecret = core.getInput('access-key-secret', { required: false });
         this.regionId = core.getInput('region-id', { required: false });
-        this.appId = core.getInput('app-id', { required: false });
-        this.imageUrl = core.getInput('image-url', { required: false });
+        this.appId = core.getInput('sae-app-id', { required: false });
+        this.imageUrl = core.getInput('acr-image-url', { required: false });
+        this.acrInstanceId = core.getInput('acr-instance-id', { required: false });
 
         let client = Client.createClient();
         let deployApplicationRequest = new SAEClient.DeployApplicationRequest({});
         deployApplicationRequest.appId = this.appId;
         deployApplicationRequest.imageUrl = this.imageUrl;
+        deployApplicationRequest.acrInstanceId = this.acrInstanceId;
+
         let runtime = new Util.RuntimeOptions({});
         let headers = { 'Content-Type': 'application/json' };
         try {
