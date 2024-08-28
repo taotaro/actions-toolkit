@@ -14,8 +14,9 @@ class Client {
         this.runId = core.getInput('run-id', { required: true });
         this.environment = core.getInput('environment', { required: true });
         this.status = core.getInput('status', { required: true });
-        this.timestamp = core.getInput('timestamp', { required: true });
         this.alertMembers = core.getInput('alert-members', { required: false });
+        // log all attr
+        console.log(JSON.stringify(this));
     }
 
 

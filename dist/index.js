@@ -11124,24 +11124,25 @@ class Client {
     constructor() {
         this.webhook = core.getInput('webhook', { required: true });
         this.icon = core.getInput('icon', { required: false });
-        this.projectUrl = core.getInput('project-url', { required: true });
         this.title = core.getInput('title', { required: true });
-        this.message = core.getInput('message', { required: true });
-        this.alertMembers = core.getInput('alert-members', { required: false });
-        this.trigger = core.getInput('trigger', { required: true });
-        this.timestamp = core.getInput('timestamp', { required: true });
-        this.duration = core.getInput('duration', { required: true });
         this.changes = core.getInput('changes', { required: true });
-        this.logUrl = core.getInput('log-url', { required: false });
+        this.trigger = core.getInput('trigger', { required: true });
+        this.duration = core.getInput('duration', { required: true });
+        this.repository = core.getInput('repository', { required: true });
+        this.runId = core.getInput('run-id', { required: true });
+        this.environment = core.getInput('environment', { required: true });
         this.status = core.getInput('status', { required: true });
+        this.alertMembers = core.getInput('alert-members', { required: false });
+        // log all attr
+        console.log(JSON.stringify(this));
     }
 
 
     async main() {
-        // if (!this.webhook) {
-        //     throw Error('webhook is required');
-        // }
-        await axios.post('https://open-sg.larksuite.com/anycross/trigger/callback/ZTlmOTQ2M2U5NDBmMWZhZGU1YTdiMzk2MGI3ODQ5OGMw', this.createRequestBody())
+        if (!this.webhook) {
+            throw Error('webhook is required');
+        }
+        await axios.post(this.webhook, this.createRequestBody())
             // await axios.post(this.webhook, this.createRequestBody())
             .then(response => {
                 // 处理成功响应
