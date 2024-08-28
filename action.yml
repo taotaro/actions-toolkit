@@ -34,8 +34,12 @@ inputs:
     description: 'Action Trigger Username'
     required: true
     default: ''
-  duration:
-    description: 'Action Run Duration (Seconds)'
+  start-time:
+    description: 'Action Run Start Time (Seconds)'
+    required: true
+    default: ''
+  end-time:
+    description: 'Action Run End Time (Seconds)'
     required: true
     default: ''
   changes:
