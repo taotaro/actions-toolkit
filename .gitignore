@@ -93,3 +93,5 @@ fabric.properties
 
 /node_modules/
 /.idea/
+
+package-lock.json

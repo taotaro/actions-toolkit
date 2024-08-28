@@ -1,29 +1,54 @@
 name: 'Send Github Action Notification To Lark With Webhook'
 description: 'Send Github Action Notification To Lark With Webhook'
+author: 'Felix Liu'
 inputs:
   webhook:
     description: 'Lark Bot Webhook'
     required: true
     default: ''
-  access-key-secret:
-    description: 'AliCloud Secret Key'
+  icon:
+    description: 'Lark Message Icon Id'
+    required: false
+    default: 'img_v3_02dv_55b29871-b41f-42ed-bbcd-7e90834cb6hu'
+  project-url:
+    description: 'Project Url'
     required: true
     default: ''
-  region-id:
-    description: 'AliCloud Region Id'
+  status:
+    description: 'Action Build Status'
     required: true
     default: ''
-  sae-app-id:
-    description: 'SAE Application ID'
+  title:
+    description: 'Notification Title'
     required: true
     default: ''
-  acr-image-url:
-    description: 'ACR Docker Image URL'
+  message:
+    description: 'Notification Message'
     required: true
     default: ''
-  acr-instance-id:
-    description: 'ACR Instance ID'
+  alert-members:
+    description: 'Alert Lark Member Ids'
+    required: false
+    default: ''
+  trigger:
+    description: 'Action Trigger Username'
     required: true
+    default: ''
+  timestamp:
+    description: 'Trigger Date Timestamp'
+    required: true
+    default: ''
+  duration:
+    description: 'Action Run Duration'
+    required: true
+    default: ''
+  changes:
+    description: 'Changes Detail'
+    required: true
+    default: ''
+  log-url:
+    description: 'Logs Url'
+    required: false
     default: ''
 
 branding:
