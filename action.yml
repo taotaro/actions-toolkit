@@ -37,11 +37,11 @@ inputs:
   start-time:
     description: 'Action Run Start Time (Seconds)'
     required: true
-    default: ''
+    default: '0'
   end-time:
     description: 'Action Run End Time (Seconds)'
     required: true
-    default: ''
+    default: '0'
   changes:
     description: 'Changes Detail'
     required: true

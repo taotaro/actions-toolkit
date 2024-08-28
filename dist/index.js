@@ -11165,7 +11165,7 @@ class Client {
             alertMembers: this.alertMembers ? this.alertMembers.split(',').reduce((acc, curr) => `${ acc } <at id=${ curr }></at>`) : '<at id=all></at>',
             date: this.dateCover(),
             duration: this.calcDuration(),
-            changes: this.changes,
+            changes: this.changes.split(' ').join('\n\t'),
             logUrl: `https://github.com/${ this.repository }/actions/runs/${ this.runId }`,
             trigger: this.trigger,
             projectUrl: `https://github.com/${ this.repository }`,
