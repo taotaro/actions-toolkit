@@ -2,10 +2,10 @@
     "name": "deploy-to-sae",
     "version": "0.0.1",
     "private": true,
-    "main": "src/deploy.js",
+    "main": "src/main.js",
     "scripts": {
         "lint": "eslint .",
-        "prepare": "ncc build src/deploy.js -o dist --source-map --license licenses.txt",
+        "prepare": "ncc build src/main.js -o dist --source-map --license licenses.txt",
         "all": "npm run lint && npm run prepare"
     },
     "repository": {
