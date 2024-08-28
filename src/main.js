@@ -15,7 +15,7 @@ class Client {
         this.duration = core.getInput('duration', { required: true });
         this.changes = core.getInput('changes', { required: true });
         this.logUrl = core.getInput('log-url', { required: false });
-        this.theme = core.getInput('theme', { required: true });
+        this.status = core.getInput('status', { required: true });
     }
 
 
@@ -49,8 +49,10 @@ class Client {
             trigger: this.trigger,
             projectUrl: this.projectUrl,
             theme: {
-
-            }
+                success: 'green',
+                failure: 'red',
+                cancelled: 'grey'
+            }[this.status] || 'default'
         }
     }
 
