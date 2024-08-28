@@ -1,8 +1,8 @@
-name: 'Build Image To AliCloud Container Registry'
-description: 'Build Image To AliCloud Container Registry'
+name: 'Send Github Action Notification To Lark With Webhook'
+description: 'Send Github Action Notification To Lark With Webhook'
 inputs:
-  access-key-id:
-    description: 'AliCloud Access Key'
+  webhook:
+    description: 'Lark Bot Webhook'
     required: true
     default: ''
   access-key-secret:
