@@ -10,10 +10,6 @@ inputs:
     description: 'Lark Message Icon Id'
     required: false
     default: 'img_v3_02dv_55b29871-b41f-42ed-bbcd-7e90834cb6hu'
-  project-url:
-    description: 'Project Url'
-    required: true
-    default: ''
   environment:
     description: 'Build Environment'
     required: true
@@ -26,8 +22,8 @@ inputs:
     description: 'Notification Title'
     required: true
     default: ''
-  message:
-    description: 'Notification Message'
+  repository:
+    description: 'Repository Name'
     required: true
     default: ''
   alert-members:
@@ -50,8 +46,8 @@ inputs:
     description: 'Changes Detail'
     required: true
     default: ''
-  log-url:
-    description: 'Logs Url'
+  run-id:
+    description: 'Action Run Id'
     required: true
     default: ''
 
