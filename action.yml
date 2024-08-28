@@ -14,6 +14,10 @@ inputs:
     description: 'Project Url'
     required: true
     default: ''
+  environment:
+    description: 'Build Environment'
+    required: true
+    default: ''
   status:
     description: 'Action Build Status'
     required: true
