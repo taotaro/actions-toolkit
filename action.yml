@@ -48,7 +48,7 @@ inputs:
     default: ''
   log-url:
     description: 'Logs Url'
-    required: false
+    required: true
     default: ''
 
 branding:
