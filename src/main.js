@@ -9,8 +9,8 @@ class Client {
         this.title = core.getInput('title', { required: true });
         this.changes = core.getInput('changes', { required: true });
         this.trigger = core.getInput('trigger', { required: true });
-        this.startTime = new Date(core.getInput('start-time', { required: true }));
-        this.endTime = new Date(core.getInput('end-time', { required: true }));
+        this.startTime = new Date(parseInt(core.getInput('start-time', { required: true })) * 1000);
+        this.endTime = new Date(parseInt(core.getInput('end-time', { required: true })) * 1000);
         this.repository = core.getInput('repository', { required: true });
         this.runId = core.getInput('run-id', { required: true });
         this.environment = core.getInput('environment', { required: true });
@@ -22,6 +22,7 @@ class Client {
 
 
     async main() {
+        let requestBody = this.createRequestBody();
         if (!this.webhook) {
             throw Error('webhook is required');
         }
@@ -70,7 +71,7 @@ class Client {
     }
 
     calcDuration() {
-        return `${ this.endTime - this.startTime }`;
+        return (this.endTime - this.startTime) / 1000;
     }
 
     capitalizeWords(str) {
