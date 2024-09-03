@@ -11125,7 +11125,6 @@ class Client {
         this.webhook = core.getInput('webhook', { required: true });
         this.icon = core.getInput('icon', { required: false });
         this.title = core.getInput('title', { required: true });
-        this.changes = core.getInput('changes', { required: true });
         this.trigger = core.getInput('trigger', { required: true });
         this.startTime = new Date(parseInt(core.getInput('start-time', { required: true })) * 1000);
         this.endTime = new Date(parseInt(core.getInput('end-time', { required: true })) * 1000);
@@ -11134,8 +11133,6 @@ class Client {
         this.environment = core.getInput('environment', { required: true });
         this.status = core.getInput('status', { required: true });
         this.alertMembers = core.getInput('alert-members', { required: false });
-        // log all attr
-        console.log(JSON.stringify(this));
     }
 
 
@@ -11166,7 +11163,6 @@ class Client {
             alertMembers: this.alertMembers ? this.alertMembers.split(',').reduce((acc, curr) => `${ acc } <at id=${ curr }></at>`) : '<at id=all></at>',
             date: this.dateCover(),
             duration: this.calcDuration(),
-            changes: this.changes.split(' ').join('\n\t'),
             logUrl: `https://github.com/${ this.repository }/actions/runs/${ this.runId }`,
             trigger: this.trigger,
             projectUrl: `https://github.com/${ this.repository }`,
