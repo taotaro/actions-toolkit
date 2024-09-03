@@ -1,5 +1,10 @@
 ## Usage
 
+Build steps
+
+1. `npm run prepare`
+2. push code
+
 ```yaml
 - name: Deploy to SAE
   uses: taotaro/deploy-to-sae@release-v1
