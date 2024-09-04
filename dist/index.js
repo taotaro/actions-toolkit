@@ -11125,6 +11125,7 @@ class Client {
         this.webhook = core.getInput('webhook', { required: true });
         this.icon = core.getInput('icon', { required: false });
         this.title = core.getInput('title', { required: true });
+        this.projectName = core.getInput('project-name', { required: true });
         this.trigger = core.getInput('trigger', { required: true });
         this.startTime = new Date(parseInt(core.getInput('start-time', { required: true })) * 1000);
         this.endTime = new Date(parseInt(core.getInput('end-time', { required: true })) * 1000);
@@ -11155,11 +11156,10 @@ class Client {
     }
 
     createRequestBody() {
-        let [, projectName] = this.repository.split('/')
         return {
             title: this.title,
             icon: this.icon,
-            message: `${ this.capitalizeWords(projectName) } ${ this.capitalizeWords(this.environment) }`,
+            message: `${ this.projectName } ${ this.capitalizeWords(this.environment) }`,
             alertMembers: this.alertMembers ? this.alertMembers.split(',').reduce((acc, curr) => `${ acc } <at id=${ curr }></at>`) : '<at id=all></at>',
             date: this.dateCover(),
             duration: this.calcDuration(),

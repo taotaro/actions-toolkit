@@ -22,6 +22,10 @@ inputs:
     description: 'Notification Title'
     required: true
     default: ''
+  project-name:
+    description: 'Project Name'
+    required: true
+    default: ''
   repository:
     description: 'Repository Name'
     required: true
