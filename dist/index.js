@@ -11138,7 +11138,6 @@ class Client {
 
 
     async main() {
-        let requestBody = this.createRequestBody();
         if (!this.webhook) {
             throw Error('webhook is required');
         }
@@ -11160,7 +11159,7 @@ class Client {
             title: this.title,
             icon: this.icon,
             message: `${ this.projectName } ${ this.capitalizeWords(this.environment) }`,
-            alertMembers: this.alertMembers ? this.alertMembers.split(',').reduce((acc, curr) => `${ acc } <at id=${ curr }></at>`) : '<at id=all></at>',
+            alertMembers: this.alertMembers ? this.alertMembers.split(',').reduce((acc, curr) => `${ acc } <at id=${ curr }></at>`, '') : '<at id=all></at>',
             date: this.dateCover(),
             duration: this.calcDuration(),
             logUrl: `https://github.com/${ this.repository }/actions/runs/${ this.runId }`,
