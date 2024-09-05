@@ -42,10 +42,6 @@ inputs:
     description: 'Action Run Start Time (Seconds)'
     required: true
     default: '0'
-  end-time:
-    description: 'Action Run End Time (Seconds)'
-    required: true
-    default: '0'
   run-id:
     description: 'Action Run Id'
     required: true
