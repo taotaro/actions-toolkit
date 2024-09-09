@@ -11128,6 +11128,7 @@ class Client {
         this.projectName = core.getInput('project-name', { required: true });
         this.trigger = core.getInput('trigger', { required: true });
         this.startTime = new Date(parseInt(core.getInput('start-time', { required: true })) * 1000);
+        this.endTime = new Date(parseInt(core.getInput('end-time', { required: true })) * 1000);
         this.repository = core.getInput('repository', { required: true });
         this.runId = core.getInput('run-id', { required: true });
         this.environment = core.getInput('environment', { required: true });
@@ -11180,10 +11181,11 @@ class Client {
         const minutes = this.startTime.getMinutes().toString().padStart(2, '0');
         const seconds = this.startTime.getSeconds().toString().padStart(2, '0');
         return `${ year }-${ month }-${ day } ${ hours }:${ minutes }:${ seconds }`;
+        core.setOutput()
     }
 
     calcDuration() {
-        return (new Date() - this.startTime) / 1000;
+        return (this.endTime - this.startTime) / 1000;
     }
 
     capitalizeWords(str) {
