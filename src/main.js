@@ -30,6 +30,7 @@ class Client {
             accessKeyId: this.accessKeyId, // Required, please ensure that the environment variables ALIBABA_CLOUD_ACCESS_KEY_SECRET is set.
             accessKeySecret: this.accessKeySecret,
         });
+        config.readTimeout = 10000;
         // See https://api.alibabacloud.com/product/sae.
         config.regionId = this.regionId;
         return new SAEClient.default(config);
