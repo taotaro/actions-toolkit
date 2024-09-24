@@ -13,16 +13,8 @@ inputs:
     description: 'AliCloud Region Id'
     required: true
     default: ''
-  sae-app-id:
-    description: 'SAE Application ID'
-    required: true
-    default: ''
-  acr-image-url:
-    description: 'ACR Docker Image URL'
-    required: true
-    default: ''
-  acr-instance-id:
-    description: 'ACR Instance ID'
+  sae-config-map-id:
+    description: 'SAE ConfigMap ID'
     required: true
     default: ''
 

@@ -12,9 +12,7 @@ class Client {
         this.accessKeyId = core.getInput('access-key-id', { required: false });
         this.accessKeySecret = core.getInput('access-key-secret', { required: false });
         this.regionId = core.getInput('region-id', { required: false });
-        this.appId = core.getInput('sae-app-id', { required: false });
-        this.imageUrl = core.getInput('acr-image-url', { required: false });
-        this.acrInstanceId = core.getInput('acr-instance-id', { required: false });
+        this.configMapId = core.getInput('sae-config-map-id', { required: false });
     }
 
     /**
@@ -37,23 +35,29 @@ class Client {
     }
 
     createRequest() {
-        let deployApplicationRequest = new SAEClient.DeployApplicationRequest({});
-        deployApplicationRequest.appId = this.appId;
-        deployApplicationRequest.imageUrl = this.imageUrl;
-        deployApplicationRequest.acrInstanceId = this.acrInstanceId;
-        return deployApplicationRequest;
+        let describeConfigMapRequest = new SAEClient.DescribeConfigMapRequest({});
+        describeConfigMapRequest.configMapId = parseInt(this.configMapId);
+        return describeConfigMapRequest;
     }
 
     async doRequest(request) {
         try {
             // Copy the code to run, please print the return value of the API by yourself.
-            await this.createClient().deployApplication(request);
+            const response = await this.createClient().describeConfigMap(request);
+            if (response.statusCode !== 200 || !response.Success) {
+                new Error("DescribeConfigMap failed");
+            }
+            const { data: configMap } = response.body.data;
+            // Set environment variables in GitHub Actions
+            for (const [key, value] of Object.entries(configMap)) {
+                core.exportVariable(key, value);
+            }
         } catch (error) {
             // Only a printing example. Please be careful about exception handling and do not ignore exceptions directly in engineering projects.
             // print error message
             console.log(error.message);
             // Please click on the link below for diagnosis.
-            console.log(error.data['Recommend']);
+            console.log(error.data);
             Util.default.assertAsString(error.message);
         }
     }
