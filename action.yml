@@ -50,11 +50,19 @@ runs:
       run: node dist/index.js
       shell: bash
 
+    # 初始化 Docker 工具
+    - name: Set up Docker BuildX
+      uses: docker/setup-buildx-action@v3.6.1
+      with:
+        driver: docker-container  # 使用 docker-container 驱动
+        install: true
+
     # 编译并提交镜像到ACR
     - name: Build and Push Docker Image To ACR
       shell: bash
       working-directory: ${{ github.action_path }}
       env:
         FINAL_IMAGE_URL: ${{ inputs.final_image_url }}
+        PROJECT_ROOT_DIR: ${{ github.workspace }}
       run: sh entrypoint.sh
 

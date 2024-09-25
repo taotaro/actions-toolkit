@@ -3,7 +3,7 @@
 # Fail on errors
 set -e
 
-pwd
+echo "$PROJECT_ROOT_DIR"
 
 # Docker build arguments placeholder
 DOCKER_BUILD_ARGS=""
@@ -18,7 +18,7 @@ for var in $(env | grep '^CONFIG_MAP_' | cut -d= -f1); do
     fi
 done
 
-echo "docker buildx build --platform linux/amd64 -t $FINAL_IMAGE_URL -f ./Dockerfile$DOCKER_BUILD_ARGS --push ."
+echo "docker buildx build --platform linux/amd64 -t $FINAL_IMAGE_URL -f $PROJECT_ROOT_DIR/Dockerfile$DOCKER_BUILD_ARGS --push ."
 
 # Execute the Docker buildx build command
 docker buildx build --platform linux/amd64 -t "$FINAL_IMAGE_URL" -f ./Dockerfile"$DOCKER_BUILD_ARGS" --push .
