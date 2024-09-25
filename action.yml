@@ -1,27 +1,13 @@
-name: 'Build Image To AliCloud Container Registry'
-description: 'Build Image To AliCloud Container Registry'
+name: "Docker Build with SAE ConfigMap"
+description: "Build Docker image with environment variables and push to registry"
 inputs:
-  access-key-id:
-    description: 'AliCloud Access Key'
+  env_vars:
+    description: "List of environment variables to pass to Docker build"
     required: true
-    default: ''
-  access-key-secret:
-    description: 'AliCloud Secret Key'
+  final_image_url:
+    description: "Final Docker image URL including tag"
     required: true
-    default: ''
-  region-id:
-    description: 'AliCloud Region Id'
-    required: true
-    default: ''
-  sae-config-map-id:
-    description: 'SAE ConfigMap ID'
-    required: true
-    default: ''
-
-branding:
-  color: 'green'
-  icon: 'anchor'
-
 runs:
-  using: 'node20'
-  main: 'dist/index.js'
+  using: "docker"
+  image: "docker:20.10.7"
+  entrypoint: [ "/entrypoint.sh" ]
