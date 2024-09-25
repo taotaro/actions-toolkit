@@ -17,6 +17,6 @@ for var in $(env | grep '^CONFIG_MAP_' | cut -d= -f1); do
 done
 
 # Execute the Docker buildx build command
-docker buildx build --platform linux/amd64"$DOCKER_BUILD_ARGS" -t "$FINAL_IMAGE_URL" -f "$PROJECT_ROOT_DIR/Dockerfile" --push .
+docker buildx build --platform linux/amd64 "$DOCKER_BUILD_ARGS" -t "$FINAL_IMAGE_URL" -f "$PROJECT_ROOT_DIR/Dockerfile" --push .
 
 echo "Docker build completed and image pushed."
