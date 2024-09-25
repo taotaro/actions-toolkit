@@ -31,10 +31,6 @@ branding:
 runs:
   using: composite
   steps:
-    - name: Output Map ID
-      run: echo "${{ inputs.sae-config-map-id }}"
-      shell: bash
-
     # 使用 SAE 配置项 ID 获取配置项
     - name: Node.js environment setup
       if: ${{ inputs.sae-config-map-id != '' }}
@@ -46,6 +42,11 @@ runs:
       if: ${{ inputs.sae-config-map-id != '' }}
       # 保持运行目录在 action 内，否则会在项目目录中查找脚本
       working-directory: ${{ github.action_path }}
+      env:
+        ALIYUN_ACCESS_KEY_ID: ${{ inputs.access-key-id }}
+        ALIYUN_ACCESS_KEY_SECRET: ${{ inputs.access-key-secret }}
+        REGION: ${{ inputs.region-id }}
+        SAE_CONFIG_MAP_ID: ${{ inputs.sae-config-map-id }}
       run: node dist/index.js
       shell: bash
 
