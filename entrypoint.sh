@@ -3,6 +3,8 @@
 # Fail on errors
 set -e
 
+pwd
+
 # Docker build arguments placeholder
 DOCKER_BUILD_ARGS=""
 
