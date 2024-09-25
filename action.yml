@@ -31,6 +31,9 @@ branding:
 runs:
   using: composite
   steps:
+    - name: Output Map ID
+      run: echo "${{ inputs.sae-config-map-id }}"
+
     # 使用 SAE 配置项 ID 获取配置项
     - name: Node.js environment setup
       if: ${{ inputs.sae-config-map-id != '' }}
