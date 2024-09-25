@@ -3,7 +3,7 @@ description: "Build Docker image with environment variables and push to registry
 inputs:
   env_vars:
     description: "List of environment variables to pass to Docker build"
-    required: true
+    required: false
   final_image_url:
     description: "Final Docker image URL including tag"
     required: true

@@ -6,7 +6,7 @@ set -e
 # Parse the input list of environment variables
 echo "Parsing environment variables list: $INPUT_ENV_VARS"
 
-DOCKER_BUILD_ARGS=""
+DOCKER_BUILD_ARGS=" "
 for var in $(echo "$INPUT_ENV_VARS" | tr "," "\n"); do
     # Extract variable name and value from system environment
     value=$(printenv "$var")
@@ -22,6 +22,6 @@ done
 # Perform docker buildx build with the build arguments
 echo "Running docker buildx build with arguments: $DOCKER_BUILD_ARGS"
 
-docker buildx build --platform linux/amd64 -t "$FINAL_IMAGE_URL" -f ./Dockerfile "$DOCKER_BUILD_ARGS" --push .
+docker buildx build --platform linux/amd64 -t "$FINAL_IMAGE_URL" -f ./Dockerfile"$DOCKER_BUILD_ARGS" --push .
 
 echo "Docker build completed and image pushed."
