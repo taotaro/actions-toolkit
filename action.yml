@@ -40,7 +40,7 @@ runs:
 
     - name: Load SAE ConfigMap
       if: ${{ inputs.sae-config-map-id != '' }}
-      run: node index.js
+      run: pwd && node .github/actions/index.js
       shell: bash
 
     # 编译并提交镜像到ACR
