@@ -39200,6 +39200,7 @@ class Client {
         this.accessKeySecret = core.getInput('access-key-secret', { required: false });
         this.regionId = core.getInput('region-id', { required: false });
         this.configMapId = core.getInput('sae-config-map-id', { required: false });
+        console.log(`SAE ConfigMap ID: ${ this.configMapId }`);
     }
 
     /**
