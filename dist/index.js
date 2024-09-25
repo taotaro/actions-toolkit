@@ -39196,10 +39196,10 @@ const Util = __nccwpck_require__(1979);
 class Client {
 
     constructor() {
-        this.accessKeyId = core.getInput('access-key-id', { required: false });
-        this.accessKeySecret = core.getInput('access-key-secret', { required: false });
-        this.regionId = core.getInput('region-id', { required: false });
-        this.configMapId = core.getInput('sae-config-map-id', { required: false });
+        this.accessKeyId = process.env.ALIYUN_ACCESS_KEY_ID;
+        this.accessKeySecret = process.env.ALIYUN_ACCESS_KEY_SECRET;
+        this.regionId = process.env.REGION;
+        this.configMapId = process.env.SAE_CONFIG_MAP_ID;
         console.log(`SAE ConfigMap ID: ${ this.configMapId }`);
     }
 
