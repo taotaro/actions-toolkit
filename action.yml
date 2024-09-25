@@ -17,9 +17,6 @@ inputs:
     description: 'SAE ConfigMap ID'
     required: false
     default: ''
-  env_vars:
-    description: "List of environment variables to pass to Docker build"
-    required: false
   final_image_url:
     description: "Final Docker image URL including tag"
     required: true
@@ -61,6 +58,5 @@ runs:
       shell: bash
       env:
         FINAL_IMAGE_URL: ${{ inputs.final_image_url }}
-        PROJECT_ROOT_DIR: ${{ github.workspace }}
       run: sh ${{ github.action_path }}/entrypoint.sh
 
