@@ -39250,6 +39250,7 @@ class Client {
     }
 
     async main() {
+        console.log(`SAE ConfigMap ID: ${ this.configMapId }`);
         if (!this.configMapId) {
             return;
         }
