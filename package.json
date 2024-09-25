@@ -1,0 +1,37 @@
+{
+    "name": "deploy-to-sae",
+    "version": "0.0.1",
+    "private": true,
+    "main": "src/main.js",
+    "scripts": {
+        "lint": "eslint .",
+        "prepare": "ncc build src/main.js -o dist --source-map --license licenses.txt",
+        "all": "npm run lint && npm run prepare"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/taotaro/deploy-to-sae.git"
+    },
+    "keywords": [
+        "actions",
+        "alibaba",
+        "container",
+        "github",
+        "acr"
+    ],
+    "author": "liuyongjun@materia-logic.com",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/taotaro/deploy-to-sae/issues"
+    },
+    "homepage": "https://github.com/taotaro/deploy-to-sae#readme",
+    "dependencies": {
+        "@actions/core": "^1.9.1",
+        "@actions/io": "^1.0.2",
+        "@alicloud/sae20190506": "^1.24.4"
+    },
+    "devDependencies": {
+        "@vercel/ncc": "^0.34.0",
+        "eslint": "^8.26.0"
+    }
+}

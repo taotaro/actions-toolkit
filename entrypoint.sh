@@ -1,27 +1,22 @@
-#!/bin/sh
+#!/bin/bash
 
 # Fail on errors
 set -e
 
-# Parse the input list of environment variables
-echo "Parsing environment variables list: $INPUT_ENV_VARS"
+# Docker build arguments placeholder
+DOCKER_BUILD_ARGS=""
 
-DOCKER_BUILD_ARGS=" "
-for var in $(echo "$INPUT_ENV_VARS" | tr "," "\n"); do
-    # Extract variable name and value from system environment
+# Find all environment variables starting with CONFIG_MAP_
+for var in $(env | grep '^CONFIG_MAP_' | cut -d= -f1); do
     value=$(printenv "$var")
-    if [ -z "$value" ]; then
-        echo "Warning: Environment variable $var is not set"
-    else
-        # Append build argument to the docker build command
+    if [ -n "$value" ]; then
+        # Append to Docker build arguments
         DOCKER_BUILD_ARGS="$DOCKER_BUILD_ARGS --build-arg $var=$value"
         echo "Added build argument: --build-arg $var=$value"
     fi
 done
 
-# Perform docker buildx build with the build arguments
-echo "Running docker buildx build with arguments: $DOCKER_BUILD_ARGS"
-
-docker buildx build --platform linux/amd64 -t "$FINAL_IMAGE_URL" -f ./Dockerfile"$DOCKER_BUILD_ARGS" --push .
+# Execute the Docker buildx build command
+docker buildx build --platform linux/amd64 -t "$FINAL_IMAGE_URL" -f ./Dockerfile "$DOCKER_BUILD_ARGS" --push .
 
 echo "Docker build completed and image pushed."

@@ -1,32 +1,46 @@
-name: "Docker Build with SAE ConfigMap"
-description: "Build Docker image with environment variables and push to registry"
+name: 'Build Image To AliCloud Container Registry'
+description: 'Build Image To AliCloud Container Registry'
 inputs:
+  access-key-id:
+    description: 'AliCloud Access Key'
+    required: false
+    default: ''
+  access-key-secret:
+    description: 'AliCloud Secret Key'
+    required: false
+    default: ''
+  region-id:
+    description: 'AliCloud Region Id'
+    required: false
+    default: 'cn-hongkong'
+  sae-config-map-id:
+    description: 'SAE ConfigMap ID'
+    required: false
+    default: ''
   env_vars:
     description: "List of environment variables to pass to Docker build"
     required: false
   final_image_url:
     description: "Final Docker image URL including tag"
     required: true
+
+branding:
+  color: 'green'
+  icon: 'anchor'
+
 runs:
   using: composite
   steps:
-      # 使用 SAE 配置项 ID 获取配置项
-      - name: Load SAE ConfigMap
-        uses: taotaro/actions-toolkit@load-sae-env
-        with:
-          access-key-id: ${{ secrets.ALICLOUD_ACCESS_KEY_ID }}
-          access-key-secret: ${{ secrets.ALICLOUD_ACCESS_KEY_SECRET }}
-          region-id: ${{ secrets.ALICLOUD_REGION_ID }}
-          sae-config-map-id: ${{ secrets.SAE_CONFIG_MAP_ID }}
+    # 使用 SAE 配置项 ID 获取配置项
+    - name: Load SAE ConfigMap
+      if: ${{ inputs.sae-config-map-id != '' }}
+      using: 'node20'
+      main: 'dist/index.js'
 
-      # 编译并提交镜像到ACR
-      - name: Build and Push Docker Image To ACR
-        env:
-          FINAL_IMAGE_URL: ${{ env.IMAGE_URL }}:${{ env.IMAGE_TAG }}
-          WALLET_CONNECT_API_KEY: ${{ env.WALLET_CONNECT_API_KEY }}
-          WORKBENCH: ${{ env.WORKBENCH }}
-          GOOGLE_CLIENT_ID: ${{ env.GOOGLE_CLIENT_ID }}
-          NODE_ENV: ${{ env.NODE_ENV }}
-          EXAPAY_API_URL: ${{ env.EXAPAY_API_URL }}
-          EXAPAY_SITE_URL: ${{ env.EXAPAY_SITE_URL }}
-          MSAL_CLIENT_ID: ${{ env.MSAL_CLIENT_ID }}
+    # 编译并提交镜像到ACR
+    - name: Build and Push Docker Image To ACR
+      shell: bash
+      env:
+        FINAL_IMAGE_URL: ${{ inputs.final_image_url }}
+      run: entrypoint.sh
+
