@@ -31,10 +31,24 @@ branding:
 runs:
   using: composite
   steps:
-#    # 使用 SAE 配置项 ID 获取配
+    # 使用 SAE 配置项 ID 获取配置项
+    - name: Node.js environment setup
+      if: ${{ inputs.sae-config-map-id != '' }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20
+
+    - name: Load SAE ConfigMap
+      if: ${{ inputs.sae-config-map-id != '' }}
+      # 保持运行目录在 action 内，否则会在项目目录中查找脚本
+      working-directory: ${{ github.action_path }}
+      run: node dist/index.js
+      shell: bash
+
     # 编译并提交镜像到ACR
     - name: Build and Push Docker Image To ACR
       shell: bash
+      working-directory: ${{ github.action_path }}
       env:
         FINAL_IMAGE_URL: ${{ inputs.final_image_url }}
       run: entrypoint.sh
