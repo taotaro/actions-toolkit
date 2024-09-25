@@ -41,13 +41,12 @@ runs:
     - name: Load SAE ConfigMap
       if: ${{ inputs.sae-config-map-id != '' }}
       # 保持运行目录在 action 内，否则会在项目目录中查找脚本
-      working-directory: ${{ github.action_path }}
       env:
         ALIYUN_ACCESS_KEY_ID: ${{ inputs.access-key-id }}
         ALIYUN_ACCESS_KEY_SECRET: ${{ inputs.access-key-secret }}
         REGION: ${{ inputs.region-id }}
         SAE_CONFIG_MAP_ID: ${{ inputs.sae-config-map-id }}
-      run: node dist/index.js
+      run: node ${{ github.action_path }}/dist/index.js
       shell: bash
 
     # 初始化 Docker 工具
@@ -64,5 +63,5 @@ runs:
       env:
         FINAL_IMAGE_URL: ${{ inputs.final_image_url }}
         PROJECT_ROOT_DIR: ${{ github.workspace }}
-      run: sh entrypoint.sh
+      run: sh ${{ github.action_path }}/entrypoint.sh
 

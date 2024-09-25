@@ -4,7 +4,7 @@
 set -e
 
 # Docker build arguments placeholder
-DOCKER_BUILD_ARGS=""
+DOCKER_BUILD_ARGS="--build-arg PROJECT_ROOT_DIR=$PROJECT_ROOT_DIR"
 
 # Find all environment variables starting with CONFIG_MAP_
 for var in $(env | grep '^CONFIG_MAP_' | cut -d= -f1); do
@@ -15,16 +15,6 @@ for var in $(env | grep '^CONFIG_MAP_' | cut -d= -f1); do
         echo "Added build argument: --build-arg $var=$value"
     fi
 done
-
-# Execute the Docker buildx build command
-
-#docker buildx create --use
-#docker buildx build --platform linux/amd64 \
-#  -t "$FINAL_IMAGE_URL" \
-#  --push \
-#  --file ./Dockerfile \
-#  $DOCKER_BUILD_ARGS \
-#  .
 
 docker buildx build --platform linux/amd64 $DOCKER_BUILD_ARGS -t "$FINAL_IMAGE_URL" -f "$PROJECT_ROOT_DIR/Dockerfile" --push .
 
