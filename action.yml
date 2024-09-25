@@ -8,6 +8,25 @@ inputs:
     description: "Final Docker image URL including tag"
     required: true
 runs:
-  using: docker
-  image: docker:20.10.7
-  entrypoint: entrypoint.sh
+  using: composite
+  steps:
+      # 使用 SAE 配置项 ID 获取配置项
+      - name: Load SAE ConfigMap
+        uses: taotaro/actions-toolkit@load-sae-env
+        with:
+          access-key-id: ${{ secrets.ALICLOUD_ACCESS_KEY_ID }}
+          access-key-secret: ${{ secrets.ALICLOUD_ACCESS_KEY_SECRET }}
+          region-id: ${{ secrets.ALICLOUD_REGION_ID }}
+          sae-config-map-id: ${{ secrets.SAE_CONFIG_MAP_ID }}
+
+      # 编译并提交镜像到ACR
+      - name: Build and Push Docker Image To ACR
+        env:
+          FINAL_IMAGE_URL: ${{ env.IMAGE_URL }}:${{ env.IMAGE_TAG }}
+          WALLET_CONNECT_API_KEY: ${{ env.WALLET_CONNECT_API_KEY }}
+          WORKBENCH: ${{ env.WORKBENCH }}
+          GOOGLE_CLIENT_ID: ${{ env.GOOGLE_CLIENT_ID }}
+          NODE_ENV: ${{ env.NODE_ENV }}
+          EXAPAY_API_URL: ${{ env.EXAPAY_API_URL }}
+          EXAPAY_SITE_URL: ${{ env.EXAPAY_SITE_URL }}
+          MSAL_CLIENT_ID: ${{ env.MSAL_CLIENT_ID }}
