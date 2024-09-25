@@ -51,5 +51,5 @@ runs:
       working-directory: ${{ github.action_path }}
       env:
         FINAL_IMAGE_URL: ${{ inputs.final_image_url }}
-      run: entrypoint.sh
+      run: sh entrypoint.sh
 
