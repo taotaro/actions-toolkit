@@ -8,6 +8,6 @@ inputs:
     description: "Final Docker image URL including tag"
     required: true
 runs:
-  using: "docker"
-  image: "docker:20.10.7"
+  using: docker
+  image: docker:20.10.7
   entrypoint: entrypoint.sh
