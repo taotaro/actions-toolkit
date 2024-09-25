@@ -32,10 +32,16 @@ runs:
   using: composite
   steps:
     # 使用 SAE 配置项 ID 获取配置项
+    - name: Node.js environment setup
+      if: ${{ inputs.sae-config-map-id != '' }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20
+
     - name: Load SAE ConfigMap
       if: ${{ inputs.sae-config-map-id != '' }}
-      using: 'node20'
-      main: 'dist/index.js'
+      run: node dist/index.js
+      shell: bash
 
     # 编译并提交镜像到ACR
     - name: Build and Push Docker Image To ACR
