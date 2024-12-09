@@ -10,11 +10,17 @@ class Client {
 
     constructor() {
         this.accessKeyId = core.getInput('access-key-id', { required: false });
+        console.log(this.accessKeyId);
         this.accessKeySecret = core.getInput('access-key-secret', { required: false });
+        console.log(this.accessKeySecret);
         this.regionId = core.getInput('region-id', { required: false });
+        console.log(this.regionId);
         this.appId = core.getInput('sae-app-id', { required: false });
+        console.log(this.appId);
         this.imageUrl = core.getInput('acr-image-url', { required: false });
+        console.log(this.imageUrl);
         this.acrInstanceId = core.getInput('acr-instance-id', { required: false });
+        console.log(this.acrInstanceId);
     }
 
     /**
@@ -33,6 +39,7 @@ class Client {
         config.readTimeout = 10000;
         // See https://api.alibabacloud.com/product/sae.
         config.regionId = this.regionId;
+        config.endpoint = `sae.${this.regionId}.aliyuncs.com`;
         return new SAEClient.default(config);
     }
 
