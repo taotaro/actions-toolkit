@@ -53,7 +53,7 @@ class Client {
             // print error message
             console.log(error.message);
             // Please click on the link below for diagnosis.
-            console.log(error.data['Recommend']);
+            console.log(error.data);
             Util.default.assertAsString(error.message);
         }
     }
