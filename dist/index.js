@@ -39238,7 +39238,7 @@ class Client {
             const { data: configMap } = response.body.data;
             // Set environment variables in GitHub Actions
             for (const [key, value] of Object.entries(configMap)) {
-                core.exportVariable(`CONFIG_MAP_${ key }`, `"${ value }"`);
+                core.exportVariable(`CONFIG_MAP_${ key }`, value.includes(" ") ? `"${ value }"` : value);
             }
         } catch (error) {
             // Only a printing example. Please be careful about exception handling and do not ignore exceptions directly in engineering projects.
