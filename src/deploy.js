@@ -40,6 +40,7 @@ class Client {
         deployApplicationRequest.imageUrl = this.imageUrl;
         let runtime = new Util.RuntimeOptions({});
         let headers = { 'Content-Type': 'application/json' };
+        console.log(JSON.stringify({ regionId, appId, imageUrl }))
         try {
             // Copy the code to run, please print the return value of the API by yourself.
             await client.deployApplicationWithOptions(deployApplicationRequest, headers, runtime);
